@@ -3,13 +3,17 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const WHATSAPP = "923340195132";
+const EMAIL = "yahebeh42@gmail.com";
+
+const whatsappLink = (message) =>
+  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
 
 const projects = [
   {
     title: "Aveda Beauty Salon",
-    category: "Beauty & Lifestyle",
+    category: "Beauty & Lifestyle Website",
     description:
-      "An elegant, responsive beauty salon website with a modern layout, service showcase, and smooth browsing experience.",
+      "An elegant, responsive beauty salon website featuring a modern homepage, services, business information, and an intuitive browsing experience.",
     images: [
       "/images/aveda-home.jpg",
       "/images/aveda-about.jpg",
@@ -18,28 +22,34 @@ const projects = [
     ],
     stack: ["React", "CSS", "Responsive Design"],
     status: "Completed",
+    link: null,
+    linkLabel: null,
   },
   {
     title: "FTS Store",
     category: "E-commerce & Android App",
     description:
-      "An online shopping platform with a responsive storefront and a published Android application.",
+      "A responsive online shopping platform with product browsing, shopping cart, checkout, and a published Android application.",
     images: [
       "/images/fts-home.jpg",
       "/images/fts-features.jpg",
+      "/images/fts-checkout.jpg",
     ],
     stack: ["React", "JavaScript", "Android"],
     status: "Published",
     link: "https://apkpure.com/fts-store/com.ftsstore.app",
+    linkLabel: "View Published App",
   },
   {
     title: "Akram Traders",
     category: "Business Management System",
     description:
-      "An in-development business solution featuring rice ordering, inventory, billing, customer accounts, and operational management.",
+      "An in-development business solution featuring rice ordering, inventory management, billing, customer accounts, and operational workflows.",
     images: [],
     stack: ["React", "Supabase", "Business Software"],
     status: "Under Development",
+    link: null,
+    linkLabel: null,
   },
 ];
 
@@ -63,25 +73,25 @@ const services = [
     icon: "◈",
     title: "Web Development",
     description:
-      "Fast, responsive, and professional websites built for modern businesses.",
+      "Modern, fast, responsive websites designed to give your business a professional online presence.",
   },
   {
     icon: "▣",
     title: "E-commerce Solutions",
     description:
-      "Online stores designed to showcase products and simplify shopping.",
+      "User-friendly online stores with product catalogs, shopping carts, and streamlined checkout experiences.",
   },
   {
     icon: "◇",
     title: "App Development",
     description:
-      "Practical Android and web applications with user-friendly interfaces.",
+      "Practical Android and web applications with intuitive interfaces and useful features.",
   },
   {
     icon: "✧",
     title: "AI & Automation",
     description:
-      "AI-powered features and automation solutions for business workflows.",
+      "Custom AI features and automation solutions to simplify business workflows.",
   },
 ];
 
@@ -90,14 +100,30 @@ function App() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [activeFilter, setActiveFilter] = useState("All");
 
-  const filters = ["All", "Completed", "Published", "Under Development"];
+  const filters = [
+    "All",
+    "Completed",
+    "Published",
+    "Under Development",
+  ];
 
   const filteredProjects =
     activeFilter === "All"
       ? projects
-      : projects.filter((project) => project.status === activeFilter);
+      : projects.filter(
+          (project) => project.status === activeFilter
+        );
 
   useEffect(() => {
+    if (!("IntersectionObserver" in window)) {
+      document
+        .querySelectorAll(".reveal")
+        .forEach((element) =>
+          element.classList.add("visible")
+        );
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -110,9 +136,9 @@ function App() {
       { threshold: 0.1 }
     );
 
-    document.querySelectorAll(".reveal").forEach((element) => {
-      observer.observe(element);
-    });
+    document
+      .querySelectorAll(".reveal")
+      .forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
   }, [activeFilter]);
@@ -126,10 +152,16 @@ function App() {
       }
     };
 
-    document.addEventListener("keydown", closeOnEscape);
+    document.addEventListener(
+      "keydown",
+      closeOnEscape
+    );
 
     return () => {
-      document.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener(
+        "keydown",
+        closeOnEscape
+      );
     };
   }, [selectedImage]);
 
@@ -138,12 +170,17 @@ function App() {
   return (
     <div className="portfolio">
       <header className="navbar">
-        <a href="#home" className="logo" onClick={closeMenu}>
+        <a
+          href="#home"
+          className="logo"
+          onClick={closeMenu}
+        >
           HADY<span>TECH</span>
           <small>SOLUTIONS</small>
         </a>
 
         <button
+          type="button"
           className="menu-toggle"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle navigation"
@@ -152,23 +189,36 @@ function App() {
           {menuOpen ? "✕" : "☰"}
         </button>
 
-        <nav className={menuOpen ? "nav-links open" : "nav-links"}>
-          {["Home", "About", "Services", "Projects", "Skills", "Contact"].map(
-            (item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                onClick={closeMenu}
-              >
-                {item}
-              </a>
-            )
-          )}
+        <nav
+          className={
+            menuOpen
+              ? "nav-links open"
+              : "nav-links"
+          }
+        >
+          {[
+            "Home",
+            "About",
+            "Services",
+            "Projects",
+            "Skills",
+            "Contact",
+          ].map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              onClick={closeMenu}
+            >
+              {item}
+            </a>
+          ))}
         </nav>
 
         <a
           className="nav-contact"
-          href={`https://wa.me/${WHATSAPP}`}
+          href={whatsappLink(
+            "Hello Hady Tech Solutions! I would like to discuss a project."
+          )}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -178,78 +228,130 @@ function App() {
 
       <main>
         <section id="home" className="hero">
-          <div className="hero-glow glow-one"></div>
-          <div className="hero-glow glow-two"></div>
+          <div className="hero-glow glow-one" />
+          <div className="hero-glow glow-two" />
 
           <div className="hero-content">
             <div className="availability">
-              <span className="availability-dot"></span>
-              OPEN FOR NEW PROJECTS
+              <span className="availability-dot" />
+              AVAILABLE FOR FREELANCE PROJECTS
             </div>
 
-            <p className="eyebrow">WELCOME TO HADY TECH SOLUTIONS</p>
+            <p className="eyebrow">
+              WELCOME TO HADY TECH SOLUTIONS
+            </p>
 
             <h1>
               Turning Ideas Into
-              <span className="gradient-text"> Digital Reality.</span>
+              <span className="gradient-text">
+                {" "}Digital Reality.
+              </span>
             </h1>
 
             <p className="hero-description">
-              I build modern websites, e-commerce platforms,
-              Android apps, and smart digital solutions that
-              help businesses grow.
+              I create modern websites, e-commerce
+              stores, Android apps, and smart digital
+              solutions that help businesses build
+              their online presence.
             </p>
 
             <div className="hero-actions">
-              <a className="btn primary" href="#projects">
+              <a
+                className="btn primary"
+                href="#projects"
+              >
                 Explore My Work <span>↗</span>
               </a>
 
               <a
                 className="btn secondary"
-                href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
-                  "Hello Hady Tech Solutions! I would like to discuss a project."
-                )}`}
+                href={whatsappLink(
+                  "Hello! I would like to discuss a website or app development project."
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Let's Work Together
               </a>
+
+              <a
+                className="btn secondary"
+                href={`mailto:${EMAIL}?subject=${encodeURIComponent(
+                  "Project Inquiry - Hady Tech Solutions"
+                )}`}
+              >
+                Email Me ↗
+              </a>
             </div>
 
             <div className="hero-highlights">
               <div>
-                <strong>03</strong>
+                <strong>
+                  {String(projects.length).padStart(2, "0")}
+                </strong>
                 <span>Featured Projects</span>
               </div>
+
               <div>
-                <strong>12</strong>
+                <strong>
+                  {String(skills.length).padStart(2, "0")}
+                </strong>
                 <span>Technical Skills</span>
               </div>
+
               <div>
-                <strong>01</strong>
+                <strong>
+                  {String(
+                    projects.filter(
+                      (project) =>
+                        project.status === "Published"
+                    ).length
+                  ).padStart(2, "0")}
+                </strong>
                 <span>Published App</span>
               </div>
             </div>
           </div>
 
-          <div className="hero-visual" aria-hidden="true">
+          <div
+            className="hero-visual"
+            aria-hidden="true"
+          >
             <div className="visual-ring">
               <div className="visual-core">
-                <span className="core-symbol">{"</>"}</span>
+                <span className="core-symbol">
+                  {"</>"}
+                </span>
                 <strong>HADY TECH</strong>
-                <small>BUILD • CREATE • INNOVATE</small>
+                <small>
+                  BUILD • CREATE • INNOVATE
+                </small>
               </div>
             </div>
-            <span className="floating-label label-one">React.js</span>
-            <span className="floating-label label-two">Web & Apps</span>
-            <span className="floating-label label-three">AI Solutions</span>
+
+            <span className="floating-label label-one">
+              React.js
+            </span>
+
+            <span className="floating-label label-two">
+              Web & Apps
+            </span>
+
+            <span className="floating-label label-three">
+              AI Solutions
+            </span>
           </div>
         </section>
 
-        <section id="about" className="section about-section">
+        <section
+          id="about"
+          className="section about-section"
+        >
           <div className="section-heading reveal">
-            <span className="eyebrow">GET TO KNOW ME</span>
+            <span className="eyebrow">
+              GET TO KNOW ME
+            </span>
+
             <h2>
               Passionate About <span>Technology.</span>
             </h2>
@@ -266,39 +368,71 @@ function App() {
             </div>
 
             <div className="about-text reveal">
-              <h3>Building Solutions That Make a Difference</h3>
+              <h3>
+                Building Digital Solutions That
+                Make a Difference
+              </h3>
+
               <p>
-                I'm a passionate web and app developer working
-                with modern technologies to create functional,
-                attractive, and user-friendly digital products.
+                I'm a web and app developer passionate
+                about transforming ideas into functional,
+                attractive, and user-friendly digital
+                experiences.
               </p>
+
               <p>
-                Through Hady Tech Solutions, I focus on
-                websites, online stores, Android applications,
-                and custom business software.
+                Through Hady Tech Solutions, I work on
+                business websites, online stores,
+                Android applications, and custom
+                business software.
               </p>
-              <a href="#contact" className="text-link">
+
+              <p>
+                Whether you need a new website or want
+                to improve your existing digital
+                presence, I'd love to hear about
+                your project.
+              </p>
+
+              <a
+                href="#contact"
+                className="text-link"
+              >
                 Let's discuss your project ↗
               </a>
             </div>
           </div>
         </section>
 
-        <section id="services" className="section services-section">
+        <section
+          id="services"
+          className="section services-section"
+        >
           <div className="section-heading center reveal">
-            <span className="eyebrow">WHAT I OFFER</span>
+            <span className="eyebrow">
+              WHAT I OFFER
+            </span>
+
             <h2>
               My <span>Services</span>
             </h2>
+
             <p>
-              Digital solutions designed for real business needs.
+              Practical digital solutions for
+              businesses and entrepreneurs.
             </p>
           </div>
 
           <div className="services-grid">
             {services.map((service) => (
-              <article className="service-card reveal" key={service.title}>
-                <div className="service-icon">{service.icon}</div>
+              <article
+                className="service-card reveal"
+                key={service.title}
+              >
+                <div className="service-icon">
+                  {service.icon}
+                </div>
+
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
               </article>
@@ -306,24 +440,39 @@ function App() {
           </div>
         </section>
 
-        <section id="projects" className="section projects-section">
+        <section
+          id="projects"
+          className="section projects-section"
+        >
           <div className="section-heading center reveal">
-            <span className="eyebrow">SELECTED WORK</span>
+            <span className="eyebrow">
+              SELECTED WORK
+            </span>
+
             <h2>
               Featured <span>Projects</span>
             </h2>
+
             <p>
-              A collection of websites, apps, and business
-              solutions I've been working on.
+              Explore my websites, e-commerce
+              applications, and business
+              software projects.
             </p>
           </div>
 
           <div className="filter-buttons">
             {filters.map((filter) => (
               <button
+                type="button"
                 key={filter}
-                className={activeFilter === filter ? "filter active" : "filter"}
-                onClick={() => setActiveFilter(filter)}
+                className={
+                  activeFilter === filter
+                    ? "filter active"
+                    : "filter"
+                }
+                onClick={() =>
+                  setActiveFilter(filter)
+                }
               >
                 {filter}
               </button>
@@ -332,28 +481,46 @@ function App() {
 
           <div className="projects-grid">
             {filteredProjects.map((project) => (
-              <article className="project-card reveal" key={project.title}>
+              <article
+                className="project-card reveal"
+                key={project.title}
+              >
                 <div className="project-preview">
                   {project.images.length > 0 ? (
                     <button
+                      type="button"
                       className="main-preview-button"
-                      onClick={() => setSelectedImage(project.images[0])}
+                      onClick={() =>
+                        setSelectedImage(
+                          project.images[0]
+                        )
+                      }
                       aria-label={`View ${project.title}`}
                     >
                       <img
                         src={project.images[0]}
-                        alt={`${project.title} website preview`}
+                        alt={`${project.title} preview`}
                         loading="lazy"
                       />
+
                       <span className="preview-overlay">
                         View Project Gallery ↗
                       </span>
                     </button>
                   ) : (
                     <div className="coming-soon-preview">
-                      <span className="coming-icon">⌘</span>
-                      <strong>AKRAM TRADERS</strong>
-                      <small>BUSINESS MANAGEMENT SYSTEM</small>
+                      <span className="coming-icon">
+                        ⌘
+                      </span>
+
+                      <strong>
+                        AKRAM TRADERS
+                      </strong>
+
+                      <small>
+                        BUSINESS MANAGEMENT SYSTEM
+                      </small>
+
                       <span className="development-pill">
                         Development in Progress
                       </span>
@@ -363,10 +530,14 @@ function App() {
 
                 <div className="project-content">
                   <div className="project-meta">
-                    <span>{project.category}</span>
+                    <span>
+                      {project.category}
+                    </span>
+
                     <span
                       className={
-                        project.status === "Under Development"
+                        project.status ===
+                        "Under Development"
                           ? "status development"
                           : "status completed"
                       }
@@ -376,31 +547,41 @@ function App() {
                   </div>
 
                   <h3>{project.title}</h3>
+
                   <p>{project.description}</p>
 
                   <div className="tech-tags">
                     {project.stack.map((tech) => (
-                      <span key={tech}>{tech}</span>
+                      <span key={tech}>
+                        {tech}
+                      </span>
                     ))}
                   </div>
 
                   {project.images.length > 0 && (
                     <div className="project-gallery">
-                      {project.images.map((image, index) => (
-                        <button
-                          key={image}
-                          onClick={() => setSelectedImage(image)}
-                          aria-label={`Open ${project.title} screenshot ${
-                            index + 1
-                          }`}
-                        >
-                          <img
-                            src={image}
-                            alt={`${project.title} screenshot ${index + 1}`}
-                            loading="lazy"
-                          />
-                        </button>
-                      ))}
+                      {project.images.map(
+                        (image, index) => (
+                          <button
+                            type="button"
+                            key={image}
+                            onClick={() =>
+                              setSelectedImage(image)
+                            }
+                            aria-label={`Open ${project.title} screenshot ${
+                              index + 1
+                            }`}
+                          >
+                            <img
+                              src={image}
+                              alt={`${project.title} screenshot ${
+                                index + 1
+                              }`}
+                              loading="lazy"
+                            />
+                          </button>
+                        )
+                      )}
                     </div>
                   )}
 
@@ -411,7 +592,7 @@ function App() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      View Published App ↗
+                      {project.linkLabel} ↗
                     </a>
                   )}
                 </div>
@@ -420,9 +601,15 @@ function App() {
           </div>
         </section>
 
-        <section id="skills" className="section skills-section">
+        <section
+          id="skills"
+          className="section skills-section"
+        >
           <div className="section-heading center reveal">
-            <span className="eyebrow">MY TOOLKIT</span>
+            <span className="eyebrow">
+              MY TOOLKIT
+            </span>
+
             <h2>
               Technologies & <span>Skills</span>
             </h2>
@@ -430,46 +617,92 @@ function App() {
 
           <div className="skills-list reveal">
             {skills.map((skill) => (
-              <span key={skill}>{skill}</span>
+              <span key={skill}>
+                {skill}
+              </span>
             ))}
           </div>
         </section>
 
-        <section id="contact" className="section contact-section">
+        <section
+          id="contact"
+          className="section contact-section"
+        >
           <div className="contact-panel reveal">
-            <span className="eyebrow">HAVE AN IDEA?</span>
+            <span className="eyebrow">
+              HAVE A PROJECT IN MIND?
+            </span>
+
             <h2>
-              Let's Build Something <span>Amazing.</span>
+              Let's Build Something{" "}
+              <span>Amazing.</span>
             </h2>
+
             <p>
-              Looking for a professional website, e-commerce
-              store, or custom app? Let's bring your project
-              to life.
+              Need a professional website, e-commerce
+              store, Android application, or custom
+              digital solution? Let's talk about
+              your idea.
             </p>
 
-            <a
-              className="btn primary"
-              href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
-                "Hello! I'm interested in your web and app development services."
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <div
+              className="hero-actions"
+              style={{
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
             >
-              Start a Conversation ↗
-            </a>
+              <a
+                className="btn primary"
+                href={whatsappLink(
+                  "Hello Hady Tech Solutions! I have a project and would like to discuss the details."
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Contact on WhatsApp ↗
+              </a>
+
+              <a
+                className="btn secondary"
+                href={`mailto:${EMAIL}?subject=${encodeURIComponent(
+                  "Project Inquiry - Hady Tech Solutions"
+                )}&body=${encodeURIComponent(
+                  "Hello Hady Tech Solutions,\n\nI would like to discuss a project.\n\nProject details:\n\n"
+                )}`}
+              >
+                Send an Email ↗
+              </a>
+            </div>
+
+            <p style={{ marginTop: "24px" }}>
+              Email:{" "}
+              <a href={`mailto:${EMAIL}`}>
+                {EMAIL}
+              </a>
+            </p>
           </div>
         </section>
       </main>
 
       <footer className="footer">
-        <a href="#home" className="footer-logo">
+        <a
+          href="#home"
+          className="footer-logo"
+        >
           HADY<span>TECH</span>
         </a>
+
         <p>
-          © {new Date().getFullYear()} Hady Tech Solutions.
+          © {new Date().getFullYear()}{" "}
+          Hady Tech Solutions.
           All Rights Reserved.
         </p>
-        <a href="#home" className="back-top">
+
+        <a
+          href="#home"
+          className="back-top"
+        >
           Back to Top ↑
         </a>
       </footer>
@@ -478,19 +711,27 @@ function App() {
         <div
           className="image-modal"
           role="presentation"
-          onClick={() => setSelectedImage(null)}
+          onClick={() =>
+            setSelectedImage(null)
+          }
         >
           <button
+            type="button"
             className="close-modal"
-            onClick={() => setSelectedImage(null)}
+            onClick={() =>
+              setSelectedImage(null)
+            }
             aria-label="Close gallery"
           >
             ×
           </button>
+
           <img
             src={selectedImage}
             alt="Full-size project screenshot"
-            onClick={(event) => event.stopPropagation()}
+            onClick={(event) =>
+              event.stopPropagation()
+            }
           />
         </div>
       )}
