@@ -3,29 +3,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
 
-    <title>
-      Hady Tech Solutions | Web, App & AI Development
-    </title>
+    <!-- Google SEO -->
+    <title>Hady Yousaf | Founder of Hady Tech Solutions</title>
 
     <meta
       name="description"
-      content="Hady Tech Solutions offers professional web development, e-commerce websites, Android app development, and AI automation solutions. Explore our projects and get in touch."
+      content="Hady Yousaf is the Founder & CEO of Hady Tech Solutions, specializing in AI, full-stack web and app development, React.js, Node.js, Supabase, e-commerce and business automation in Pakistan."
     />
 
     <meta
       name="keywords"
-      content="Hady Tech Solutions, web developer Pakistan, React developer, e-commerce development, Android app development, AI automation, business software, freelance web developer"
+      content="Hady Yousaf, Hady Tech Solutions, Founder of Hady Tech Solutions, Hady Tech Solutions CEO, Hady Yousaf developer, React.js, Node.js, Supabase, AI developer Pakistan, full-stack developer, e-commerce development, business automation"
     />
 
-    <meta name="author" content="Hady Tech Solutions" />
+    <meta name="author" content="Hady Yousaf" />
     <meta name="robots" content="index, follow" />
-
     <meta name="theme-color" content="#070c1a" />
 
     <link
@@ -39,60 +36,49 @@
       href="/favicon.svg"
     />
 
-    <!-- Open Graph: Facebook and LinkedIn -->
-
-    <meta
-      property="og:type"
-      content="website"
-    />
-
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
     <meta
       property="og:site_name"
       content="Hady Tech Solutions"
     />
-
     <meta
       property="og:title"
-      content="Hady Tech Solutions | Web, App & AI Development"
+      content="Hady Yousaf | Founder & CEO of Hady Tech Solutions"
     />
-
     <meta
       property="og:description"
-      content="Modern websites, e-commerce stores, Android apps, and smart digital solutions. Explore the Hady Tech Solutions portfolio."
+      content="Meet Hady Yousaf, Founder & CEO of Hady Tech Solutions. Explore AI, web development, mobile apps, e-commerce and business automation projects."
     />
-
     <meta
       property="og:url"
       content="https://hady-tech-solutions-portfolio.vercel.app/"
     />
 
-    <!-- Twitter / X Card -->
-
-    <meta
-      name="twitter:card"
-      content="summary"
-    />
-
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary" />
     <meta
       name="twitter:title"
-      content="Hady Tech Solutions"
+      content="Hady Yousaf | Founder of Hady Tech Solutions"
     />
-
     <meta
       name="twitter:description"
-      content="Professional websites, e-commerce solutions, Android apps, and AI automation."
+      content="Founder & CEO of Hady Tech Solutions. AI, full-stack web and app development, e-commerce and business automation."
     />
 
-    <!-- Structured Data -->
-
+    <!-- Organization Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
+        "@id": "https://hady-tech-solutions-portfolio.vercel.app/#organization",
         "name": "Hady Tech Solutions",
         "url": "https://hady-tech-solutions-portfolio.vercel.app/",
-        "description": "Web development, e-commerce, Android applications and AI automation services.",
+        "description": "AI, full-stack web and app development, e-commerce and business automation services.",
         "email": "yahebeh42@gmail.com",
+        "founder": {
+          "@id": "https://hady-tech-solutions-portfolio.vercel.app/#founder"
+        },
         "contactPoint": {
           "@type": "ContactPoint",
           "telephone": "+923340195132",
@@ -100,14 +86,56 @@
         }
       }
     </script>
+
+    <!-- Founder Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://hady-tech-solutions-portfolio.vercel.app/#founder",
+        "name": "Hady Yousaf",
+        "url": "https://hady-tech-solutions-portfolio.vercel.app/",
+        "jobTitle": "Founder & CEO",
+        "description": "Hady Yousaf is the Founder and CEO of Hady Tech Solutions, an AI and full-stack web and app development business based in Pakistan.",
+        "worksFor": {
+          "@id": "https://hady-tech-solutions-portfolio.vercel.app/#organization"
+        },
+        "founder": {
+          "@id": "https://hady-tech-solutions-portfolio.vercel.app/#organization"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/hady-yousaf-a26139440"
+        ],
+        "knowsAbout": [
+          "React.js",
+          "Node.js",
+          "Supabase",
+          "JavaScript",
+          "Full-Stack Web Development",
+          "Android App Development",
+          "E-commerce Development",
+          "Artificial Intelligence",
+          "Business Automation"
+        ]
+      }
+    </script>
+
+    <!-- Website Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Hady Tech Solutions",
+        "url": "https://hady-tech-solutions-portfolio.vercel.app/",
+        "publisher": {
+          "@id": "https://hady-tech-solutions-portfolio.vercel.app/#organization"
+        }
+      }
+    </script>
   </head>
 
   <body>
     <div id="root"></div>
-
-    <script
-      type="module"
-      src="/src/main.jsx"
-    ></script>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

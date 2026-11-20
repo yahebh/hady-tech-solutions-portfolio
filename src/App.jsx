@@ -4,6 +4,8 @@ import "./App.css";
 
 const WHATSAPP = "923340195132";
 const EMAIL = "yahebeh42@gmail.com";
+const LINKEDIN =
+  "https://www.linkedin.com/in/hady-yousaf-a26139440";
 
 const whatsappLink = (message) =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
@@ -116,11 +118,9 @@ function App() {
 
   useEffect(() => {
     if (!("IntersectionObserver" in window)) {
-      document
-        .querySelectorAll(".reveal")
-        .forEach((element) =>
-          element.classList.add("visible")
-        );
+      document.querySelectorAll(".reveal").forEach(
+        (element) => element.classList.add("visible")
+      );
       return;
     }
 
@@ -136,9 +136,9 @@ function App() {
       { threshold: 0.1 }
     );
 
-    document
-      .querySelectorAll(".reveal")
-      .forEach((element) => observer.observe(element));
+    document.querySelectorAll(".reveal").forEach(
+      (element) => observer.observe(element)
+    );
 
     return () => observer.disconnect();
   }, [activeFilter]);
@@ -152,10 +152,7 @@ function App() {
       }
     };
 
-    document.addEventListener(
-      "keydown",
-      closeOnEscape
-    );
+    document.addEventListener("keydown", closeOnEscape);
 
     return () => {
       document.removeEventListener(
@@ -191,9 +188,7 @@ function App() {
 
         <nav
           className={
-            menuOpen
-              ? "nav-links open"
-              : "nav-links"
+            menuOpen ? "nav-links open" : "nav-links"
           }
         >
           {[
@@ -253,6 +248,13 @@ function App() {
               stores, Android apps, and smart digital
               solutions that help businesses build
               their online presence.
+            </p>
+
+            <p className="hero-description">
+              <strong>Hady Yousaf</strong> — Founder
+              &amp; CEO of Hady Tech Solutions,
+              specializing in AI and full-stack
+              web and app development.
             </p>
 
             <div className="hero-actions">
@@ -332,11 +334,9 @@ function App() {
             <span className="floating-label label-one">
               React.js
             </span>
-
             <span className="floating-label label-two">
               Web & Apps
             </span>
-
             <span className="floating-label label-three">
               AI Solutions
             </span>
@@ -351,7 +351,6 @@ function App() {
             <span className="eyebrow">
               GET TO KNOW ME
             </span>
-
             <h2>
               Passionate About <span>Technology.</span>
             </h2>
@@ -369,37 +368,57 @@ function App() {
 
             <div className="about-text reveal">
               <h3>
-                Building Digital Solutions That
-                Make a Difference
+                Hady Yousaf — Founder &amp; CEO
+                of Hady Tech Solutions
               </h3>
 
               <p>
-                I'm a web and app developer passionate
-                about transforming ideas into functional,
-                attractive, and user-friendly digital
-                experiences.
+                I'm Hady Yousaf, the Founder and
+                CEO of Hady Tech Solutions, a
+                technology brand established in
+                2026 in Pakistan.
               </p>
 
               <p>
-                Through Hady Tech Solutions, I work on
-                business websites, online stores,
-                Android applications, and custom
-                business software.
+                I specialize in AI, full-stack
+                web and app development, React.js,
+                Node.js, Supabase, e-commerce
+                solutions, and business automation.
               </p>
 
               <p>
-                Whether you need a new website or want
-                to improve your existing digital
-                presence, I'd love to hear about
-                your project.
+                Through Hady Tech Solutions, I
+                develop business websites, online
+                stores, Android applications, and
+                custom business software designed
+                to solve practical problems.
+              </p>
+
+              <p>
+                My goal is to help businesses
+                strengthen their digital presence
+                through modern, responsive,
+                user-friendly technology.
               </p>
 
               <a
-                href="#contact"
+                href={LINKEDIN}
                 className="text-link"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Let's discuss your project ↗
+                Connect with Founder Hady Yousaf
+                on LinkedIn ↗
               </a>
+
+              <p style={{ marginTop: "18px" }}>
+                <a
+                  href="#contact"
+                  className="text-link"
+                >
+                  Let's discuss your project ↗
+                </a>
+              </p>
             </div>
           </div>
         </section>
@@ -412,11 +431,9 @@ function App() {
             <span className="eyebrow">
               WHAT I OFFER
             </span>
-
             <h2>
               My <span>Services</span>
             </h2>
-
             <p>
               Practical digital solutions for
               businesses and entrepreneurs.
@@ -432,7 +449,6 @@ function App() {
                 <div className="service-icon">
                   {service.icon}
                 </div>
-
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
               </article>
@@ -448,11 +464,9 @@ function App() {
             <span className="eyebrow">
               SELECTED WORK
             </span>
-
             <h2>
               Featured <span>Projects</span>
             </h2>
-
             <p>
               Explore my websites, e-commerce
               applications, and business
@@ -502,7 +516,6 @@ function App() {
                         alt={`${project.title} preview`}
                         loading="lazy"
                       />
-
                       <span className="preview-overlay">
                         View Project Gallery ↗
                       </span>
@@ -512,15 +525,12 @@ function App() {
                       <span className="coming-icon">
                         ⌘
                       </span>
-
                       <strong>
                         AKRAM TRADERS
                       </strong>
-
                       <small>
                         BUSINESS MANAGEMENT SYSTEM
                       </small>
-
                       <span className="development-pill">
                         Development in Progress
                       </span>
@@ -533,7 +543,6 @@ function App() {
                     <span>
                       {project.category}
                     </span>
-
                     <span
                       className={
                         project.status ===
@@ -547,7 +556,6 @@ function App() {
                   </div>
 
                   <h3>{project.title}</h3>
-
                   <p>{project.description}</p>
 
                   <div className="tech-tags">
@@ -609,9 +617,8 @@ function App() {
             <span className="eyebrow">
               MY TOOLKIT
             </span>
-
             <h2>
-              Technologies & <span>Skills</span>
+              Technologies &amp; <span>Skills</span>
             </h2>
           </div>
 
@@ -639,10 +646,10 @@ function App() {
             </h2>
 
             <p>
-              Need a professional website, e-commerce
-              store, Android application, or custom
-              digital solution? Let's talk about
-              your idea.
+              Need a professional website,
+              e-commerce store, Android
+              application, or custom digital
+              solution? Let's talk about your idea.
             </p>
 
             <div
@@ -681,15 +688,22 @@ function App() {
                 {EMAIL}
               </a>
             </p>
+
+            <p style={{ marginTop: "12px" }}>
+              <a
+                href={LINKEDIN}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hady Yousaf — LinkedIn ↗
+              </a>
+            </p>
           </div>
         </section>
       </main>
 
       <footer className="footer">
-        <a
-          href="#home"
-          className="footer-logo"
-        >
+        <a href="#home" className="footer-logo">
           HADY<span>TECH</span>
         </a>
 
@@ -699,10 +713,7 @@ function App() {
           All Rights Reserved.
         </p>
 
-        <a
-          href="#home"
-          className="back-top"
-        >
+        <a href="#home" className="back-top">
           Back to Top ↑
         </a>
       </footer>
@@ -711,16 +722,12 @@ function App() {
         <div
           className="image-modal"
           role="presentation"
-          onClick={() =>
-            setSelectedImage(null)
-          }
+          onClick={() => setSelectedImage(null)}
         >
           <button
             type="button"
             className="close-modal"
-            onClick={() =>
-              setSelectedImage(null)
-            }
+            onClick={() => setSelectedImage(null)}
             aria-label="Close gallery"
           >
             ×
