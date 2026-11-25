@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
@@ -15,12 +14,18 @@ const projects = [
     title: "Aveda Beauty Salon",
     category: "Beauty & Lifestyle Website",
     description:
-      "An elegant, responsive beauty salon website featuring a modern homepage, services, business information, and an intuitive browsing experience.",
+      "A responsive beauty salon website developed by Hady Tech Solutions, featuring a modern homepage, service information, business details, and a user-friendly browsing experience.",
     images: [
       "/images/aveda-home.jpg",
       "/images/aveda-about.jpg",
       "/images/aveda-services.jpg",
       "/images/aveda-why-us.jpg",
+    ],
+    imageAlts: [
+      "Aveda Beauty Salon responsive website homepage",
+      "Aveda Beauty Salon about page",
+      "Aveda Beauty Salon services page",
+      "Aveda Beauty Salon why choose us section",
     ],
     stack: ["React", "CSS", "Responsive Design"],
     status: "Completed",
@@ -31,11 +36,16 @@ const projects = [
     title: "FTS Store",
     category: "E-commerce & Android App",
     description:
-      "A responsive online shopping platform with product browsing, shopping cart, checkout, and a published Android application.",
+      "An e-commerce website and published Android application featuring product browsing, shopping cart functionality, and a streamlined checkout experience.",
     images: [
       "/images/fts-home.jpg",
       "/images/fts-features.jpg",
       "/images/fts-checkout.jpg",
+    ],
+    imageAlts: [
+      "FTS Store e-commerce website homepage",
+      "FTS Store online shopping features",
+      "FTS Store shopping cart and checkout page",
     ],
     stack: ["React", "JavaScript", "Android"],
     status: "Published",
@@ -46,8 +56,9 @@ const projects = [
     title: "Akram Traders",
     category: "Business Management System",
     description:
-      "An in-development business solution featuring rice ordering, inventory management, billing, customer accounts, and operational workflows.",
+      "A custom business management system under development, featuring rice ordering, inventory management, sales billing, customer accounts, and business automation workflows.",
     images: [],
+    imageAlts: [],
     stack: ["React", "Supabase", "Business Software"],
     status: "Under Development",
     link: null,
@@ -73,27 +84,27 @@ const skills = [
 const services = [
   {
     icon: "◈",
-    title: "Web Development",
+    title: "Full-Stack Web Development",
     description:
-      "Modern, fast, responsive websites designed to give your business a professional online presence.",
+      "Custom business websites, responsive landing pages, and full-stack web applications using React.js, Node.js, and modern database technologies.",
   },
   {
     icon: "▣",
-    title: "E-commerce Solutions",
+    title: "E-commerce Website Development",
     description:
-      "User-friendly online stores with product catalogs, shopping carts, and streamlined checkout experiences.",
+      "Professional online stores with product catalogs, shopping carts, checkout functionality, and user-friendly shopping experiences for businesses.",
   },
   {
     icon: "◇",
-    title: "App Development",
+    title: "Web & Android App Development",
     description:
-      "Practical Android and web applications with intuitive interfaces and useful features.",
+      "Custom Android and web applications designed around business requirements, intuitive interfaces, and practical functionality.",
   },
   {
     icon: "✧",
-    title: "AI & Automation",
+    title: "AI & Business Automation",
     description:
-      "Custom AI features and automation solutions to simplify business workflows.",
+      "AI-powered applications, intelligent workflows, and custom business automation solutions designed to reduce repetitive manual work.",
   },
 ];
 
@@ -171,6 +182,7 @@ function App() {
           href="#home"
           className="logo"
           onClick={closeMenu}
+          aria-label="Hady Tech Solutions homepage"
         >
           HADY<span>TECH</span>
           <small>SOLUTIONS</small>
@@ -187,6 +199,7 @@ function App() {
         </button>
 
         <nav
+          aria-label="Main navigation"
           className={
             menuOpen ? "nav-links open" : "nav-links"
           }
@@ -222,6 +235,8 @@ function App() {
       </header>
 
       <main>
+        {/* HERO SECTION */}
+
         <section id="home" className="hero">
           <div className="hero-glow glow-one" />
           <div className="hero-glow glow-two" />
@@ -237,24 +252,24 @@ function App() {
             </p>
 
             <h1>
-              Turning Ideas Into
+              Hady Yousaf
               <span className="gradient-text">
-                {" "}Digital Reality.
+                {" "}— Founder of Hady Tech Solutions.
               </span>
             </h1>
 
             <p className="hero-description">
-              I create modern websites, e-commerce
-              stores, Android apps, and smart digital
-              solutions that help businesses build
-              their online presence.
+              AI, full-stack web and app developer
+              based in Pakistan, helping businesses
+              build modern websites, e-commerce
+              stores, Android applications, and
+              intelligent automation solutions.
             </p>
 
             <p className="hero-description">
-              <strong>Hady Yousaf</strong> — Founder
-              &amp; CEO of Hady Tech Solutions,
-              specializing in AI and full-stack
-              web and app development.
+              Turning ideas into digital reality
+              through practical, responsive, and
+              user-friendly technology.
             </p>
 
             <div className="hero-actions">
@@ -334,14 +349,18 @@ function App() {
             <span className="floating-label label-one">
               React.js
             </span>
+
             <span className="floating-label label-two">
               Web & Apps
             </span>
+
             <span className="floating-label label-three">
               AI Solutions
             </span>
           </div>
         </section>
+
+        {/* ABOUT SECTION */}
 
         <section
           id="about"
@@ -351,8 +370,9 @@ function App() {
             <span className="eyebrow">
               GET TO KNOW ME
             </span>
+
             <h2>
-              Passionate About <span>Technology.</span>
+              About <span>Hady Yousaf.</span>
             </h2>
           </div>
 
@@ -368,8 +388,7 @@ function App() {
 
             <div className="about-text reveal">
               <h3>
-                Hady Yousaf — Founder &amp; CEO
-                of Hady Tech Solutions
+                Founder &amp; CEO of Hady Tech Solutions
               </h3>
 
               <p>
@@ -380,25 +399,33 @@ function App() {
               </p>
 
               <p>
-                I specialize in AI, full-stack
-                web and app development, React.js,
-                Node.js, Supabase, e-commerce
-                solutions, and business automation.
+                I specialize in full-stack web
+                development, Android applications,
+                artificial intelligence, e-commerce
+                development, and business automation.
+              </p>
+
+              <p>
+                My technical expertise includes
+                React.js, JavaScript, Node.js,
+                Supabase, MySQL, and modern
+                responsive web technologies.
               </p>
 
               <p>
                 Through Hady Tech Solutions, I
-                develop business websites, online
-                stores, Android applications, and
-                custom business software designed
-                to solve practical problems.
+                develop professional websites,
+                online stores, mobile applications,
+                and custom business management
+                software for businesses and
+                entrepreneurs.
               </p>
 
               <p>
-                My goal is to help businesses
-                strengthen their digital presence
-                through modern, responsive,
-                user-friendly technology.
+                I am based in Pakistan and available
+                for freelance projects, remote
+                collaborations, and international
+                development opportunities.
               </p>
 
               <a
@@ -407,8 +434,7 @@ function App() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Connect with Founder Hady Yousaf
-                on LinkedIn ↗
+                Connect with Hady Yousaf on LinkedIn ↗
               </a>
 
               <p style={{ marginTop: "18px" }}>
@@ -423,6 +449,8 @@ function App() {
           </div>
         </section>
 
+        {/* SERVICES SECTION */}
+
         <section
           id="services"
           className="section services-section"
@@ -431,12 +459,16 @@ function App() {
             <span className="eyebrow">
               WHAT I OFFER
             </span>
+
             <h2>
-              My <span>Services</span>
+              Web, App &amp; <span>AI Services</span>
             </h2>
+
             <p>
-              Practical digital solutions for
-              businesses and entrepreneurs.
+              Hady Tech Solutions offers website
+              development, e-commerce solutions,
+              Android applications, and AI-powered
+              business automation services.
             </p>
           </div>
 
@@ -446,15 +478,22 @@ function App() {
                 className="service-card reveal"
                 key={service.title}
               >
-                <div className="service-icon">
+                <div
+                  className="service-icon"
+                  aria-hidden="true"
+                >
                   {service.icon}
                 </div>
+
                 <h3>{service.title}</h3>
+
                 <p>{service.description}</p>
               </article>
             ))}
           </div>
         </section>
+
+        {/* PROJECTS SECTION */}
 
         <section
           id="projects"
@@ -464,13 +503,16 @@ function App() {
             <span className="eyebrow">
               SELECTED WORK
             </span>
+
             <h2>
-              Featured <span>Projects</span>
+              Hady Tech Solutions <span>Projects</span>
             </h2>
+
             <p>
-              Explore my websites, e-commerce
-              applications, and business
-              software projects.
+              Explore website development,
+              e-commerce applications, Android
+              apps, and custom business software
+              projects by Hady Yousaf.
             </p>
           </div>
 
@@ -479,6 +521,7 @@ function App() {
               <button
                 type="button"
                 key={filter}
+                aria-pressed={activeFilter === filter}
                 className={
                   activeFilter === filter
                     ? "filter active"
@@ -505,17 +548,20 @@ function App() {
                       type="button"
                       className="main-preview-button"
                       onClick={() =>
-                        setSelectedImage(
-                          project.images[0]
-                        )
+                        setSelectedImage({
+                          src: project.images[0],
+                          alt: project.imageAlts[0],
+                        })
                       }
                       aria-label={`View ${project.title}`}
                     >
                       <img
                         src={project.images[0]}
-                        alt={`${project.title} preview`}
+                        alt={project.imageAlts[0]}
                         loading="lazy"
+                        decoding="async"
                       />
+
                       <span className="preview-overlay">
                         View Project Gallery ↗
                       </span>
@@ -525,12 +571,15 @@ function App() {
                       <span className="coming-icon">
                         ⌘
                       </span>
+
                       <strong>
                         AKRAM TRADERS
                       </strong>
+
                       <small>
                         BUSINESS MANAGEMENT SYSTEM
                       </small>
+
                       <span className="development-pill">
                         Development in Progress
                       </span>
@@ -543,6 +592,7 @@ function App() {
                     <span>
                       {project.category}
                     </span>
+
                     <span
                       className={
                         project.status ===
@@ -556,6 +606,7 @@ function App() {
                   </div>
 
                   <h3>{project.title}</h3>
+
                   <p>{project.description}</p>
 
                   <div className="tech-tags">
@@ -574,7 +625,11 @@ function App() {
                             type="button"
                             key={image}
                             onClick={() =>
-                              setSelectedImage(image)
+                              setSelectedImage({
+                                src: image,
+                                alt:
+                                  project.imageAlts[index],
+                              })
                             }
                             aria-label={`Open ${project.title} screenshot ${
                               index + 1
@@ -582,10 +637,11 @@ function App() {
                           >
                             <img
                               src={image}
-                              alt={`${project.title} screenshot ${
-                                index + 1
-                              }`}
+                              alt={
+                                project.imageAlts[index]
+                              }
                               loading="lazy"
+                              decoding="async"
                             />
                           </button>
                         )
@@ -609,6 +665,8 @@ function App() {
           </div>
         </section>
 
+        {/* SKILLS SECTION */}
+
         <section
           id="skills"
           className="section skills-section"
@@ -617,8 +675,10 @@ function App() {
             <span className="eyebrow">
               MY TOOLKIT
             </span>
+
             <h2>
-              Technologies &amp; <span>Skills</span>
+              Development Technologies &amp;{" "}
+              <span>Skills</span>
             </h2>
           </div>
 
@@ -631,6 +691,8 @@ function App() {
           </div>
         </section>
 
+        {/* CONTACT SECTION */}
+
         <section
           id="contact"
           className="section contact-section"
@@ -641,15 +703,16 @@ function App() {
             </span>
 
             <h2>
-              Let's Build Something{" "}
-              <span>Amazing.</span>
+              Contact <span>Hady Tech Solutions.</span>
             </h2>
 
             <p>
-              Need a professional website,
-              e-commerce store, Android
-              application, or custom digital
-              solution? Let's talk about your idea.
+              Looking for a web developer,
+              e-commerce website developer,
+              Android app developer, or AI
+              automation solution? Contact Hady
+              Tech Solutions to discuss your
+              project requirements.
             </p>
 
             <div
@@ -702,8 +765,14 @@ function App() {
         </section>
       </main>
 
+      {/* FOOTER */}
+
       <footer className="footer">
-        <a href="#home" className="footer-logo">
+        <a
+          href="#home"
+          className="footer-logo"
+          aria-label="Hady Tech Solutions"
+        >
           HADY<span>TECH</span>
         </a>
 
@@ -718,10 +787,14 @@ function App() {
         </a>
       </footer>
 
+      {/* PROJECT IMAGE MODAL */}
+
       {selectedImage && (
         <div
           className="image-modal"
-          role="presentation"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Project image gallery"
           onClick={() => setSelectedImage(null)}
         >
           <button
@@ -734,8 +807,8 @@ function App() {
           </button>
 
           <img
-            src={selectedImage}
-            alt="Full-size project screenshot"
+            src={selectedImage.src}
+            alt={selectedImage.alt}
             onClick={(event) =>
               event.stopPropagation()
             }
